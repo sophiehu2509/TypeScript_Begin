@@ -1,37 +1,53 @@
-// let say:string = "hello";
-
-// function sum(a:number, b:number): number { 
-//     return a + b;
-// }
-// sum (3,4)
-// console.log("324256")
-
-// let nums: number []; 
-// // 数组，每一项是数字
-
-// let num: Array<number> = [3, 4, 5]
-
-// let u:object;
-// u = {
-//     name:'sdf',
-//     age:343
-// }
-type Gender = "男" | "女"
-
-type User = {
-    name: string
-    age: number
-    gender: "男" | "女"
+type Deck = NormalCard[]
+type Color = "spade" | "diamond" | "club" | "heart";
+type NormalCard = {
+    color: Color
+    mark: number
 }
 
-let u: User
-
-u = {
-    name: "890",
-    age: 34,
-    gender: "男"
+function createDeck(): Deck {
+    const deck: Deck = [];
+    for (let i = 1; i <= 13; i++){
+        deck.push({
+            color:"spade",
+            mark: i
+        });
+        deck.push({
+            color:"diamond",
+            mark: i
+        });
+        deck.push({
+            color:"club",
+            mark: i
+        });
+        deck.push({
+            color:"heart",
+            mark: i
+        })
+    }
+    return deck;
 }
 
-function getUsers(g:Gender): User[] {
-    return [];
+function printDeck(deck: Deck) {
+    let res = '\n'
+    deck.forEach(card => {
+        let str = card.color;
+        if(card.mark <= 10){
+            str += card.mark;
+        }
+        else if(card.mark === 11){
+            str += 'J'
+        }
+        else if(card.mark === 12){
+            str += 'Q'
+        }
+        else if(card.mark === 13){
+            str += 'K'
+        }
+        res +=  str + '\t'
+    })
+    console.log(res);
 }
+
+const deck = createDeck();
+printDeck(deck);
