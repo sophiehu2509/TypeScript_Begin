@@ -4,7 +4,8 @@
     "module":"CommonJS", //配置编译目标使用的模块化标准
     "lib":["ES2016", "DOM"], //配置环境
     "outDir": "./dist",
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "removeComments": true //编译的时候去掉 comment的部分
 
   },
   "include": ["./src"], //只编译某个文件夹下的 ts文件

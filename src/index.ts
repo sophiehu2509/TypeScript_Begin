@@ -16,22 +16,43 @@
 //     name:'sdf',
 //     age:343
 // }
-type Gender = "男" | "女"
 
-type User = {
-    name: string
-    age: number
-    gender: "男" | "女"
-}
 
-let u: User
+// type Gender = "男" | "女"
 
-u = {
-    name: "890",
-    age: 34,
-    gender: "男"
-}
+// type User = {
+//     name: string
+//     age: number
+//     gender: "男" | "女"
+// }
 
-function getUsers(g:Gender): User[] {
-    return [];
-}
+// let u: User
+
+// u = {
+//     name: "890",
+//     age: 34,
+//     gender: "男"
+// }
+
+// function getUsers(g:Gender): User[] {
+//     return [];
+// }
+
+ //枚举
+enum Gender{
+    Male = "帅哥",
+    Female = "美女"
+ }
+ 
+ let gender: Gender;
+ 
+ gender = Gender.Male;
+ gender = Gender.Female;
+
+ function printGenders(){
+     const vals = Object.values(Gender);
+     vals.forEach(v => {
+         console.log(v)
+     });
+ }
+ printGenders();

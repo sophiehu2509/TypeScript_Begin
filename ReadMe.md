@@ -173,3 +173,91 @@ function sum(a: number, b:number, c?:number){}
 
 也可以先付给默认值
 function sum(a: number, b:number, c:number = 0){}
+
+# 扩展类型-枚举
+
+> 扩展类型：类型别名、枚举、接口和类
+
+枚举：把一堆东西一个个列出来
+枚举：通常用于约束某个变量的取值范围
+
+自变量和联合类型配合使用，也可以达到同样的目标 
+
+# 自变量类型的问题
+
+- 在类型约束位置，会产生重复代码。可以使用类型别名来解决
+- 逻辑含义和真实的值产生了混淆，会导致当修改真实值的时候，产生大量的修改
+- 字面量类型不会进入编译结果
+
+# 枚举
+
+如何定义一个枚举  （逻辑含义和真实值 分开了）
+
+```
+enum 枚举名{
+  枚举字段1 = 值1，
+  枚举字段2 = 值2
+  ...
+}
+```
+
+枚举会出现在编译结果中，编译结果中表现为对象
+
+枚举的规则：
+- 枚举的字段值可以是字符串或数字
+
+# 模块化标准
+
+>前端领域中的模块化标准：ES6、commonjs、amd、umd、system、esnext
+
+>TS中如何书写模块化语句
+>编译结果？？
+
+# TS中如何书写模块化语句
+
+TS中，导入和导出模块，统一使用ES6的模块化标准
+
+# 编译结果中的模块化
+
+可配置
+
+tsc --watch 监听文件变化，但是不会重新编译
+
+TS中的模块化，在编译结果中
+
+- 如果编译结果的标准化是 ‘ES6’：没有区别
+- 如果编译结果的模块化标准是 commonjs：导出的声明，会变成exports的属性，默认的导出会变成exports的default属性
+
+# 解决默认导入的错误
+
+有些模块是按照 commonjs的标准写的 按照js的方法引入会报错
+
+```
+import {readFileSync} from 'fs'
+fs.readFileSync("./") 
+```
+会报错 不能用默认导入 module.export = {}
+这时候要 
+
+```
+import * as fs from "fs"
+fs.readFileSync("./")
+```
+配置名称            含义
+module             设置编译结果中使用的模块化标准
+noImplicitUseStrict  设置解析模块的模式
+removeComments       编译结果中不包含“use strict”
+noEmitOnError        错误时不生成编译结果
+esModuleInterop       启用es模块化交互非es模块导出
+
+# 如何在TS中书写commonjs模块化代码
+
+# 模块解析
+
+模块解析：应该从什么位置寻找模块
+TS中，有两种模块解析策略
+
+- classic：经典
+- node:node解析策略（唯一的变化，是将js替换成ts）
+  - 相对路径 ```require("./xxx")``` 找package.json 是否有main的配置，可能是main：main.ts  看xxx这个文件夹下是否有 main.ts的文件或者是否有 index.ts文件
+  - 非相对模块  ```require("xxx")``` 根目录跟 node_module一个根目录
